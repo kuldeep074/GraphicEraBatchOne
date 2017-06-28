@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:background="@color/app_prominent"
+    android:gravity="center"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    >
+<TextView
+    android:id="@+id/titleText"
+    android:layout_width="match_parent"
+    android:textSize="@dimen/toolbar_text_size"
+    android:text="screen Title"
+    android:gravity="center_vertical"
+    android:layout_height="?attr/actionBarSize">
+
+
+</TextView>
+</android.support.v7.widget.Toolbar>

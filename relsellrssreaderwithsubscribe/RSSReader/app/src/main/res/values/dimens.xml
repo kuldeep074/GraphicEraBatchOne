@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (c) 2017. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="apptitle_textsize">16sp</dimen>
+    <dimen name="app_padding">2dp</dimen>
+    <dimen name="toolbar_text_size">14sp</dimen>
+    <dimen name="ads_layout_height">40dp</dimen>
+    <dimen name="ads_layout_text">14sp</dimen>
+    <dimen name="ads_layout_margin_from_top">15dp</dimen>
+    <dimen name="spinner_margin_from_top">25dp</dimen>
+    <dimen name="spinner_list_item_height">40dp</dimen>
+    <dimen name="spinner_list_item_width">40dp</dimen>
+    <dimen name="autocomplete_textview_height">40dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+</resources>
