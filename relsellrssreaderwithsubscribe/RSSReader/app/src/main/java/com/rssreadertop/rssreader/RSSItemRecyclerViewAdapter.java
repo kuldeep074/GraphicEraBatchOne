@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.rssreadertop.R;
+import com.rssreadertop.pojo.IRSSItem;
 import com.rssreadertop.rssreader.RSSFragment.OnListFragmentInteractionListener;
 import com.rssreadertop.rssreader.dummy.DummyContent.DummyItem;
 
@@ -27,10 +28,10 @@ import java.util.List;
  */
 public class RSSItemRecyclerViewAdapter extends RecyclerView.Adapter<RSSItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<IRSSItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public RSSItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public RSSItemRecyclerViewAdapter(List<IRSSItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -45,8 +46,8 @@ public class RSSItemRecyclerViewAdapter extends RecyclerView.Adapter<RSSItemRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+
+        holder.mContentView.setText(mValues.get(position).getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +55,7 @@ public class RSSItemRecyclerViewAdapter extends RecyclerView.Adapter<RSSItemRecy
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    //mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
         });
@@ -69,7 +70,7 @@ public class RSSItemRecyclerViewAdapter extends RecyclerView.Adapter<RSSItemRecy
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public IRSSItem mItem;
 
         public ViewHolder(View view) {
             super(view);

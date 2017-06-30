@@ -10,6 +10,8 @@ package com.rssreadertop.rssreader;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -44,6 +46,19 @@ public class RSSFragment extends Fragment {
     private String finalUrl="http://www.relsellglobal.in/category/android-development/feed/";
     private RSSHandleXml obj;
     ArrayList<IRSSItem> mList;
+    RSSItemRecyclerViewAdapter mAdapter;
+
+    Handler mHandlerForRSSData = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == 1) {
+                mAdapter.notifyDataSetChanged();
+            }
+
+        }
+    };
+
 
     public RSSFragment() {
     }
@@ -81,7 +96,9 @@ public class RSSFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new RSSItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            mList = new ArrayList<>();
+            mAdapter = new RSSItemRecyclerViewAdapter(mList, mListener);
+            recyclerView.setAdapter(mAdapter);
         }
         return view;
     }
@@ -91,7 +108,7 @@ public class RSSFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        obj = new RSSHandleXml(finalUrl,mList,null);
+        obj = new RSSHandleXml(finalUrl,mList,mHandlerForRSSData);
         obj.fetchXML();
 
 

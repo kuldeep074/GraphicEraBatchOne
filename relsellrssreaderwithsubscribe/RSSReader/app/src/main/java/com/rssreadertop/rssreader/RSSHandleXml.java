@@ -135,16 +135,6 @@ public class RSSHandleXml implements IRSSHandler{
 
 
 
-                    /*InputStreamReader inputStreamReader = new InputStreamReader(stream,"UTF-8");
-                    BufferedReader r = new BufferedReader(inputStreamReader);
-
-                    StringBuilder total = new StringBuilder();
-                    String line;
-                    Log.v("Input = ", "start reading");
-                    while ((line = r.readLine()) != null) {
-                        Log.v("Input = ","\n");
-                        Log.v("Input = ",line);
-                    }*/
 
 
 
