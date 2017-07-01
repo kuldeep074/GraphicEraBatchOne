@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="in.relsellglobal.colorpickerdemo.MainActivity">
+
+    <LinearLayout android:id="@+id/dropper" android:layout_width="60dp" android:layout_height="60dp" ></LinearLayout>
+
+    <TextView android:id="@+id/dropperTV" android:layout_toRightOf="@+id/dropper" android:layout_marginLeft="@dimen/activity_horizontal_margin" android:layout_width="wrap_content" android:layout_height="wrap_content" ></TextView>
+
+    <ImageView android:layout_centerInParent="true" android:id="@+id/image" android:layout_below="@+id/dropper" android:scaleType="fitCenter" android:layout_width="match_parent" android:layout_height="200dp"/>
+
+    <Button android:layout_centerHorizontal="true" android:id="@+id/galleryBtn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@+id/image" android:text="add or edit image"/>
+
+
+
+</RelativeLayout>
