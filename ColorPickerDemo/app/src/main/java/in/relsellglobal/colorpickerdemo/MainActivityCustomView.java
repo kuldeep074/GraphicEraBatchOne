@@ -5,6 +5,7 @@
 package in.relsellglobal.colorpickerdemo;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -72,6 +74,24 @@ public class MainActivityCustomView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 callCamera();
+            }
+        });
+
+        textView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                final android.content.ClipboardManager clipboardManager = (android.content.ClipboardManager) MainActivityCustomView.this
+                        .getSystemService(Context.CLIPBOARD_SERVICE);
+                final android.content.ClipData clipData = android.content.ClipData
+                        .newPlainText("text label",textView.getText());
+                clipboardManager.setPrimaryClip(clipData);
+
+                Toast.makeText(MainActivityCustomView.this,"Copied color code "+textView.getText(),Toast.LENGTH_LONG).show();
+
+                return true;
+
+
             }
         });
 
