@@ -23,6 +23,7 @@ public class CustomImageView extends ImageView {
     Bitmap bitmap;
     int cursorX = 50;
     int cursorY = 50;
+    boolean cursorToBeDrawn;
 
 
     public CustomImageView(Context context, AttributeSet attrs) {
@@ -41,6 +42,11 @@ public class CustomImageView extends ImageView {
         if(bitmap != null) {
             bitmap = Bitmap.createScaledBitmap(bitmap,canvas.getWidth(), canvas.getHeight(), true);
             canvas.drawBitmap(bitmap, 0, 0, p);
+            if(cursorToBeDrawn) {
+                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.right_img);
+                bmp = Bitmap.createScaledBitmap(bmp,100,100, true);
+                canvas.drawBitmap(bmp,cursorX,cursorY,p);
+            }
 
 
         }
@@ -51,6 +57,14 @@ public class CustomImageView extends ImageView {
         bitmap = bm;
         invalidate();
     }
+
+    public void setCursorToBeDrawn(boolean val,int cursorX, int cursorY) {
+        cursorToBeDrawn = val;
+        this.cursorX = cursorX;
+        this.cursorY = cursorY;
+        invalidate();
+    }
+
 
 
 
