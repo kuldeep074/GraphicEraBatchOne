@@ -38,6 +38,7 @@ public class MainActivityCustomView extends AppCompatActivity {
     private CustomImageView selectedImage;
     LinearLayout dropper;
     TextView textView;
+    TextView textViewRGB;
     Button galleryBtn;
 
     private Button takePictureButton;
@@ -53,11 +54,12 @@ public class MainActivityCustomView extends AppCompatActivity {
         selectedImage = (CustomImageView) findViewById(R.id.image);
         dropper = (LinearLayout) findViewById(R.id.dropper);
         textView = (TextView) findViewById(R.id.dropperTV);
+        textViewRGB = (TextView)findViewById(R.id.dropperTVRGB);
         galleryBtn = (Button) findViewById(R.id.galleryBtn);
         takePictureButton = (Button) findViewById(R.id.cameraBtn);
 
 
-        root = (RelativeLayout) findViewById(R.id.activity_main);
+        //root = (RelativeLayout) findViewById(R.id.activity_main);
 
 
         galleryBtn.setOnClickListener(new View.OnClickListener() {
@@ -182,31 +184,34 @@ public class MainActivityCustomView extends AppCompatActivity {
                     switch (action) {
                         case MotionEvent.ACTION_DOWN:
                         case MotionEvent.ACTION_MOVE:
-                            selectedImage.setCursorToBeDrawn(true, evX, evY);
-                            int pxl = bitmap.getPixel(evX, evY);
-                            int r1 = Color.red(pxl);
-                            int g1 = Color.green(pxl);
-                            int b1 = Color.blue(pxl);
-                            int alpha1 = Color.alpha(pxl);
+                            //selectedImage.setCursorToBeDrawn(true, evX, evY);
+                            if(evX > 0 && evY > 0 && evX < bitmap.getWidth() && evY < bitmap.getHeight() ) {
+                                int pxl = bitmap.getPixel(evX, evY);
+                                int r1 = Color.red(pxl);
+                                int g1 = Color.green(pxl);
+                                int b1 = Color.blue(pxl);
+                                int alpha1 = Color.alpha(pxl);
 
 
-                            Log.v("TAG", "R G B " + r1 + " " + g1 + " " + b1);
+                                Log.v("TAG", "R G B " + r1 + " " + g1 + " " + b1);
 
-                            final StringBuilder builder1 = new StringBuilder();
-                            builder1.append("#");
-                            builder1.append(r1 > 9 ? Integer.toHexString(r1) : "0" + Integer.toHexString(r1)); // Real computation here
-                            builder1.append(g1 > 9 ? Integer.toHexString(g1) : "0" + Integer.toHexString(g1)); // Real computation here
-                            builder1.append(b1 > 9 ? Integer.toHexString(b1) : "0" + Integer.toHexString(b1)); // Real computation here
+                                final StringBuilder builder1 = new StringBuilder();
+                                builder1.append("#");
+                                builder1.append(r1 > 9 ? Integer.toHexString(r1) : "0" + Integer.toHexString(r1)); // Real computation here
+                                builder1.append(g1 > 9 ? Integer.toHexString(g1) : "0" + Integer.toHexString(g1)); // Real computation here
+                                builder1.append(b1 > 9 ? Integer.toHexString(b1) : "0" + Integer.toHexString(b1)); // Real computation here
 
-                            Log.v("TAG", "Hex Color is " + builder1.toString());
-                            //Toast.makeText(MainActivity.this,"Selected Color is "+builder.toString(),Toast.LENGTH_LONG).show();
+                                Log.v("TAG", "Hex Color is " + builder1.toString());
+                                //Toast.makeText(MainActivity.this,"Selected Color is "+builder.toString(),Toast.LENGTH_LONG).show();
 
-                            try {
+                                try {
 
-                                dropper.setBackgroundColor(Color.parseColor(builder1.toString()));
-                                textView.setText(builder1.toString());
-                            } catch (IllegalArgumentException e) {
-                                e.printStackTrace();
+                                    dropper.setBackgroundColor(Color.parseColor(builder1.toString()));
+                                    textViewRGB.setText("R("+r1+") " + "G("+g1+") " + "B("+b1+")");
+                                    textView.setText(builder1.toString());
+                                } catch (IllegalArgumentException e) {
+                                    e.printStackTrace();
+                                }
                             }
                             res = true;
                             break;
