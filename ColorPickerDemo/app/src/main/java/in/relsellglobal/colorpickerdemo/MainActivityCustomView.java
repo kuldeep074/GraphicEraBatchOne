@@ -5,6 +5,7 @@
 package in.relsellglobal.colorpickerdemo;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,12 +17,16 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,6 +49,9 @@ public class MainActivityCustomView extends AppCompatActivity {
     private Button takePictureButton;
     File fileCamera;
 
+    ImageView cursorImageView;
+    FrameLayout contentLayout;
+
 
     RelativeLayout root;
 
@@ -54,9 +62,115 @@ public class MainActivityCustomView extends AppCompatActivity {
         selectedImage = (CustomImageView) findViewById(R.id.image);
         dropper = (LinearLayout) findViewById(R.id.dropper);
         textView = (TextView) findViewById(R.id.dropperTV);
-        textViewRGB = (TextView)findViewById(R.id.dropperTVRGB);
+        textViewRGB = (TextView) findViewById(R.id.dropperTVRGB);
         galleryBtn = (Button) findViewById(R.id.galleryBtn);
         takePictureButton = (Button) findViewById(R.id.cameraBtn);
+        cursorImageView = (ImageView) findViewById(R.id.cursorimage);
+        contentLayout = (FrameLayout) findViewById(R.id.content);
+
+
+        cursorImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    ClipData data = ClipData.newPlainText("", "");
+                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(
+                            view);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        view.startDragAndDrop(data, shadowBuilder, view, 0);
+                    } else {
+                        view.startDrag(data, shadowBuilder, view, 0);
+                    }
+
+                    view.setVisibility(View.INVISIBLE);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
+
+        contentLayout.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+
+                int evX = (int) event.getX();
+                int evY = (int) event.getY();
+
+                int action = event.getAction();
+                switch (event.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        // do nothing
+                        break;
+                    case DragEvent.ACTION_DRAG_ENTERED:
+
+                        break;
+                    case DragEvent.ACTION_DRAG_EXITED:
+
+                        break;
+                    case DragEvent.ACTION_DROP:
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        // Dropped, reassign View to ViewGroup
+                        try {
+                        View view = (View) event.getLocalState();
+
+                        view.setVisibility(View.VISIBLE);
+
+                        if (selectedImage != null) {
+
+                            selectedImage.setDrawingCacheEnabled(true);
+
+                            selectedImage.buildDrawingCache();
+
+                            selectedImage.setImageBitmap(bitmap);
+
+                            bitmap = selectedImage.getDrawingCache();
+                        } else {
+                            return true;
+                        }
+
+
+                        if (evX > 0 && evY > 0 && evX < bitmap.getWidth() && evY < bitmap.getHeight()) {
+                            int pxl = bitmap.getPixel(evX, evY);
+                            int r1 = Color.red(pxl);
+                            int g1 = Color.green(pxl);
+                            int b1 = Color.blue(pxl);
+                            int alpha1 = Color.alpha(pxl);
+
+
+                            Log.v("TAG", "R G B " + r1 + " " + g1 + " " + b1);
+
+                            final StringBuilder builder1 = new StringBuilder();
+                            builder1.append("#");
+                            builder1.append(r1 > 9 ? Integer.toHexString(r1) : "0" + Integer.toHexString(r1)); // Real computation here
+                            builder1.append(g1 > 9 ? Integer.toHexString(g1) : "0" + Integer.toHexString(g1)); // Real computation here
+                            builder1.append(b1 > 9 ? Integer.toHexString(b1) : "0" + Integer.toHexString(b1)); // Real computation here
+
+                            Log.v("TAG", "Hex Color is " + builder1.toString());
+                            //Toast.makeText(MainActivity.this,"Selected Color is "+builder.toString(),Toast.LENGTH_LONG).show();
+
+
+
+                                dropper.setBackgroundColor(Color.parseColor(builder1.toString()));
+                                textViewRGB.setText("R(" + r1 + ") " + "G(" + g1 + ") " + "B(" + b1 + ")");
+                                textView.setText(builder1.toString());
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                        break;
+
+                    default:
+                        break;
+                }
+
+                return true;
+            }
+        });
 
 
         //root = (RelativeLayout) findViewById(R.id.activity_main);
@@ -86,10 +200,10 @@ public class MainActivityCustomView extends AppCompatActivity {
                 final android.content.ClipboardManager clipboardManager = (android.content.ClipboardManager) MainActivityCustomView.this
                         .getSystemService(Context.CLIPBOARD_SERVICE);
                 final android.content.ClipData clipData = android.content.ClipData
-                        .newPlainText("text label",textView.getText());
+                        .newPlainText("text label", textView.getText());
                 clipboardManager.setPrimaryClip(clipData);
 
-                Toast.makeText(MainActivityCustomView.this,"Copied color code "+textView.getText(),Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivityCustomView.this, "Copied color code " + textView.getText(), Toast.LENGTH_LONG).show();
 
                 return true;
 
@@ -170,7 +284,7 @@ public class MainActivityCustomView extends AppCompatActivity {
             bitmap = selectedImage.getDrawingCache();
 
 
-            selectedImage.setOnTouchListener(new View.OnTouchListener() {
+           /* selectedImage.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent ev) {
                     final int action = ev.getAction();
@@ -216,7 +330,7 @@ public class MainActivityCustomView extends AppCompatActivity {
                             res = true;
                             break;
                         case MotionEvent.ACTION_UP:
-                            selectedImage.setCursorToBeDrawn(false, evX, evY);
+                            //selectedImage.setCursorToBeDrawn(false, evX, evY);
                             res = true;
                             break;
 
@@ -225,7 +339,7 @@ public class MainActivityCustomView extends AppCompatActivity {
 
                     return res;
                 }
-            });
+            });*/
 
         }
 

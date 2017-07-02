@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7f020000"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -25,12 +26,16 @@
     </RelativeLayout>
 
 
+    <FrameLayout android:layout_below="@+id/dropShowerRL"  android:background="#FFF" android:layout_width="match_parent" android:layout_height="300dp" android:id="@+id/content" android:layout_marginTop="@dimen/activity_vertical_margin">
     <in.relsellglobal.colorpickerdemo.CustomImageView android:id="@+id/image"
                                                       android:layout_width="match_parent" android:layout_height="300dp"
-                                                      android:layout_below="@+id/dropShowerRL" android:layout_marginTop="@dimen/activity_vertical_margin"
+                                                      android:layout_marginTop="@dimen/activity_vertical_margin"
                                                       android:scaleType="fitCenter"/>
 
-    <ImageView android:id="@+id/cursorimage" android:layout_marginTop="@dimen/activity_vertical_margin" android:layout_below="@+id/image" android:layout_width="20dp" android:layout_height="20dp" android:src="@mipmap/dropper_image"/>
+    </FrameLayout>
+
+
+    <ImageView android:id="@+id/cursorimage" android:layout_below="@+id/content" android:layout_marginTop="@dimen/activity_vertical_margin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/dropper_image"/>
 
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/cursorimage"
