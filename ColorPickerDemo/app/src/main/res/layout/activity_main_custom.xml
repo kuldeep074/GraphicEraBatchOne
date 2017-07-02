@@ -29,7 +29,6 @@
     <FrameLayout android:layout_below="@+id/dropShowerRL"  android:background="#FFF" android:layout_width="match_parent" android:layout_height="300dp" android:id="@+id/content" android:layout_marginTop="@dimen/activity_vertical_margin">
     <in.relsellglobal.colorpickerdemo.CustomImageView android:id="@+id/image"
                                                       android:layout_width="match_parent" android:layout_height="300dp"
-                                                      android:layout_marginTop="@dimen/activity_vertical_margin"
                                                       android:scaleType="fitCenter"/>
 
     </FrameLayout>
@@ -37,12 +36,16 @@
 
     <ImageView android:id="@+id/cursorimage" android:layout_below="@+id/content" android:layout_marginTop="@dimen/activity_vertical_margin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@mipmap/dropper_image"/>
 
+    <TextView android:id="@+id/tosTV" android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_below="@+id/content" android:layout_marginTop="@dimen/activity_vertical_margin"
+              android:layout_alignParentRight="true" android:textColor="#FFF" android:text="TOS &amp; Privacy Policy" ></TextView>
+
 
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/cursorimage"
                   android:gravity="center_horizontal" >
 
         <Button android:id="@+id/cameraBtn" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Use Camera" android:visibility="gone"/>
+                android:text="Use Camera" />
 
         <Button android:id="@+id/galleryBtn" android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="Use Gallery"/>

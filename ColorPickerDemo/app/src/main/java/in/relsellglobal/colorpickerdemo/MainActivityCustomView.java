@@ -44,6 +44,7 @@ public class MainActivityCustomView extends AppCompatActivity {
     LinearLayout dropper;
     TextView textView;
     TextView textViewRGB;
+    TextView tosTV;
     Button galleryBtn;
 
     private Button takePictureButton;
@@ -67,6 +68,17 @@ public class MainActivityCustomView extends AppCompatActivity {
         takePictureButton = (Button) findViewById(R.id.cameraBtn);
         cursorImageView = (ImageView) findViewById(R.id.cursorimage);
         contentLayout = (FrameLayout) findViewById(R.id.content);
+        tosTV = (TextView)findViewById(R.id.tosTV);
+
+        tosTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MainActivityCustomView.this,TOSActivity.class);
+                startActivity(i);
+
+            }
+        });
 
 
         cursorImageView.setOnTouchListener(new View.OnTouchListener() {
