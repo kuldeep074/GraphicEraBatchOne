@@ -61,6 +61,7 @@ public class MainActivityCustomView extends AppCompatActivity {
 
     ImageView cursorImageView;
     FrameLayout contentLayout;
+    ImageView shareButton;
 
 
     RelativeLayout root;
@@ -83,6 +84,7 @@ public class MainActivityCustomView extends AppCompatActivity {
         cursorImageView = (ImageView) findViewById(R.id.cursorimage);
         contentLayout = (FrameLayout) findViewById(R.id.content);
         tosTV = (TextView) findViewById(R.id.tosTV);
+        shareButton = (ImageView)findViewById(R.id.shareButton);
 
 
         if (BuildConfig.DEBUG) {
@@ -100,6 +102,9 @@ public class MainActivityCustomView extends AppCompatActivity {
                     MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
                 }
 
+            } else {
+                // production
+                MobileAds.initialize(this, "ca-app-pub-3676840300761048~6667031041");
             }
 
 
@@ -121,6 +126,9 @@ public class MainActivityCustomView extends AppCompatActivity {
                     mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
                 }
 
+            } else {
+                // production id
+                mInterstitialAd.setAdUnitId("ca-app-pub-3676840300761048/8143764249");
             }
 
 
@@ -244,6 +252,14 @@ public class MainActivityCustomView extends AppCompatActivity {
         //root = (RelativeLayout) findViewById(R.id.activity_main);
 
         clickHandlerCode();
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share();
+            }
+        });
+
 
 
     }
@@ -531,6 +547,13 @@ public class MainActivityCustomView extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         return new File(mediaStorageDir.getPath() + File.separator +
                 "IMG_" + timeStamp + ".jpg");
+    }
+
+    private void share() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,"Color Code "+textView.getText()+"\n"+textViewRGB.getText());
+        startActivity(Intent.createChooser(sharingIntent,"Sharing"));
     }
 
 
