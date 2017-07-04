@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="horizontal"
+    android:layout_margin="5dp"
+    android:background="@drawable/layer">
+
+
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/an"
+                android:layout_margin="10dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CALL"
+                android:background="@drawable/sel"
+                android:layout_margin="2dp"
+                android:layout_marginTop="50dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEXT"
+                android:background="@drawable/sel"
+                android:layout_margin="4dp"
+                android:layout_marginTop="50dp"
+                />
+
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sel"
+        android:layout_margin="10dp"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+
+</LinearLayout>
