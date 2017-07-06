@@ -6,6 +6,8 @@ package com.rssreadertop.rssreader;
 
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,6 +27,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.rssreadertop.R;
 import com.rssreadertop.pojo.IRSSItem;
 import com.rssreadertop.pojo.RSSItem;
@@ -34,12 +37,12 @@ import java.util.ArrayList;
 
 
 public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,RSSFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RSSFragment.OnListFragmentInteractionListener {
 
     FrameLayout contentLayout;
 
 
-    EditText title,link,description;
+    EditText title, link, description;
     ArrayList<IRSSItem> mList;
 
     private NavigationView navigationView;
@@ -49,16 +52,20 @@ public class Dashboard extends AppCompatActivity
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(msg.what == 1) {
+            if (msg.what == 1) {
                 IRSSItem localObj = mList.get(0);   /// here we are getting the first element
                 title.setText(localObj.getTitle());
                 link.setText(localObj.getLink());
-                description.setText(((RSSItem)localObj).getDescription());
+                description.setText(((RSSItem) localObj).getDescription());
             }
 
         }
     };
-
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
@@ -67,13 +74,13 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        contentLayout = (FrameLayout)findViewById(R.id.contentLayout);
+        contentLayout = (FrameLayout) findViewById(R.id.contentLayout);
 
-        navigationView = (NavigationView)findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         RSSFragment rssFragment = new RSSFragment();
-        fragmentTransaction.replace(contentLayout.getId(),rssFragment);
+        fragmentTransaction.replace(contentLayout.getId(), rssFragment);
         fragmentTransaction.commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -96,7 +103,7 @@ public class Dashboard extends AppCompatActivity
 
         listForSubscribedItems = new ArrayList<>();
 
-        DummyContent.DummyItem dummyItem = new DummyContent.DummyItem("0","Android Development","xxx");
+        DummyContent.DummyItem dummyItem = new DummyContent.DummyItem("0", "Android Development", "xxx");
 
         listForSubscribedItems.add(dummyItem);
 
@@ -144,12 +151,11 @@ public class Dashboard extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        for(DummyContent.DummyItem dummyItem : listForSubscribedItems) {
-            if(dummyItem.id.equalsIgnoreCase(""+id)) {
-                Log.v("TAG","Open "+id);
+        for (DummyContent.DummyItem dummyItem : listForSubscribedItems) {
+            if (dummyItem.id.equalsIgnoreCase("" + id)) {
+                Log.v("TAG", "Open " + id);
             }
         }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -161,12 +167,10 @@ public class Dashboard extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(IRSSItem item) {
 
-        /*Log.v("TAG","Touched dummy Item");
-        if(!listForSubscribedItems.contains(item)) {
-            listForSubscribedItems.add(item);
-        }
-        // add this item to database as subscribed list
-        refreshNavigationViewItems();*/
+        String link = item.getLink();
+        Intent i = new Intent(Dashboard.this, RSSLinkDetail.class);
+        i.putExtra("link",link);
+        startActivity(i);
 
 
     }
@@ -176,12 +180,10 @@ public class Dashboard extends AppCompatActivity
 
         Menu menu = navigationView.getMenu();
         menu.removeGroup(0);
-        for(DummyContent.DummyItem dummyItem : listForSubscribedItems) {
+        for (DummyContent.DummyItem dummyItem : listForSubscribedItems) {
             menu.add(0, Integer.parseInt(dummyItem.id), 100, dummyItem.content).setIcon(R.mipmap.app_icon);
         }
     }
-
-
 
 
 }
