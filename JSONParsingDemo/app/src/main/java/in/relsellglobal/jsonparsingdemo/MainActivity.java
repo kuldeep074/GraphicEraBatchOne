@@ -7,6 +7,8 @@ package in.relsellglobal.jsonparsingdemo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,17 +26,30 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<WebPojo> webPojoArrayList;
+    ProgressBar pb;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         webPojoArrayList = new ArrayList<>();
+        pb = (ProgressBar) findViewById(R.id.pb);
 
         new JSONParsingTask().execute();
     }
 
     public class JSONParsingTask extends AsyncTask<Void,Void,String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pb.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(Void... params) {
@@ -74,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            pb.setVisibility(View.GONE);
 
             if(s!=null) {
                 try {

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/activity_main"
+    android:id="@+id/content_main_navigation"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,20 +10,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="in.relsellglobal.jsonparsingdemo.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-
-    <ProgressBar
-        android:id="@+id/pb"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/AlertDialog.AppCompat"
-        android:indeterminate="true"
-    />
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="in.relsellglobal.colorpickerdemo.MainNavigationActivity"
+    tools:showIn="@layout/app_bar_main_navigation">
 
 </RelativeLayout>
