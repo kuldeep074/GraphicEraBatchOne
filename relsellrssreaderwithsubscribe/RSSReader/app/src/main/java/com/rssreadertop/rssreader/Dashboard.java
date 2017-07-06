@@ -95,6 +95,15 @@ public class Dashboard extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         listForSubscribedItems = new ArrayList<>();
+
+        DummyContent.DummyItem dummyItem = new DummyContent.DummyItem("0","Android Development","xxx");
+
+        listForSubscribedItems.add(dummyItem);
+
+
+        refreshNavigationViewItems();
+
+
     }
 
     @Override
@@ -150,14 +159,14 @@ public class Dashboard extends AppCompatActivity
 
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(IRSSItem item) {
 
-        Log.v("TAG","Touched dummy Item");
+        /*Log.v("TAG","Touched dummy Item");
         if(!listForSubscribedItems.contains(item)) {
             listForSubscribedItems.add(item);
         }
         // add this item to database as subscribed list
-        refreshNavigationViewItems();
+        refreshNavigationViewItems();*/
 
 
     }
