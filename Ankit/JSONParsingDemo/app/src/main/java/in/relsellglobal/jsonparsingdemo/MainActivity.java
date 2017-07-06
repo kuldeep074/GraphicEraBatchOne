@@ -21,7 +21,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+import in.relsellglobal.jsonparsingdemo.dummy.DummyContent;
+
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
     ArrayList<WebPojo> webPojoArrayList;
 
@@ -32,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
         webPojoArrayList = new ArrayList<>();
 
         new JSONParsingTask().execute();
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 
     public class JSONParsingTask extends AsyncTask<Void,Void,String> {
