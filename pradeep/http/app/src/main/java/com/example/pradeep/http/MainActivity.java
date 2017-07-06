@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Bitmap doInBackground(Void... params) {
+        protected void doInBackground(Void... params) {
             //try {
 
             String server = "relsellglobal.in";
@@ -80,7 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mConnectionCode == HttpURLConnection.HTTP_OK) {
 
-                    InputStream inputStream = connection.getInputStream();
+                    InputStream inputStream = null;
+                    try {
+                        inputStream = connection.getInputStream();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
                     BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
 
                     String line = "";
@@ -98,13 +103,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
             return false;
-        }*/
+        }
         }
 
         @Override
         protected void onPostExecute(Bitmap success) {
             image.setImageBitmap(success);
-            /*if (success) {
+            if (success) {
                 System.out.println("Response String "+responseString);
 
 
@@ -114,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (mConnectionCode >= HttpURLConnection.HTTP_MULT_CHOICE && mConnectionCode < HttpURLConnection.HTTP_BAD_REQUEST) {
 
 
-            }*/
+            }
         }
 
 
