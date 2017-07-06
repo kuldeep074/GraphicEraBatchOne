@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.pradeep.recylclerviewdemo.MainActivity"
     android:id="@+id/mainactivity"
-    android:background="#FF0B00">
-d
+    android:background="#FF0B00"
+    android:orientation="vertical">
 
 </LinearLayout>
