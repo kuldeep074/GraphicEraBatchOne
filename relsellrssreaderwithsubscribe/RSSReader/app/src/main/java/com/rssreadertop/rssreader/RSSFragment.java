@@ -108,7 +108,7 @@ public class RSSFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        obj = new RSSHandleXml(finalUrl,mList,mHandlerForRSSData);
+        obj = new RSSHandleXml(getActivity(),finalUrl,mList,mHandlerForRSSData);
         obj.fetchXML();
 
 
