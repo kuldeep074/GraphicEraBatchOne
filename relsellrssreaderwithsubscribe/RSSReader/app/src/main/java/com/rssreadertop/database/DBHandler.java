@@ -45,8 +45,9 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_FEED_TABLE = "CREATE TABLE " + FeedTable.FEED_TABLE + "("
-                + FeedTable.KEY_ID + " INTEGER PRIMARY KEY,"
-                + FeedTable.KEY_TITLE + " TEXT UNIQUE,"
+                + FeedTable.KEY_ID + " INTEGER PRIMARY KEY, "
+                + FeedTable.KEY_TITLE + " TEXT, "
+                + FeedTable.KEY_LINK + " TEXT UNIQUE, "
                 + FeedTable.KEY_PUBDATE + " TEXT" + ")";
 
 
@@ -88,7 +89,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         List<IRSSItem> irssItemList = new ArrayList<>();
         Cursor cursor = db.query(FeedTable.FEED_TABLE, new String[]{FeedTable.KEY_ID,
-                FeedTable.KEY_LINK, FeedTable.KEY_TITLE, FeedTable.KEY_PUBDATE},null,null,null,null,FeedTable.KEY_ID+" DESC","10");
+                FeedTable.KEY_LINK, FeedTable.KEY_TITLE, FeedTable.KEY_PUBDATE},null,null,null,null,FeedTable.KEY_ID+" ASC","10");
 
         if(cursor != null && cursor.getCount() > 0) {
 
