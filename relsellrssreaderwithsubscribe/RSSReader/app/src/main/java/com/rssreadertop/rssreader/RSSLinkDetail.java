@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.rssreadertop.R;
 
 public class RSSLinkDetail extends AppCompatActivity {
 
     WebView webView;
+    ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class RSSLinkDetail extends AppCompatActivity {
         String link = getIntent().getStringExtra("link");
 
         webView = (WebView)findViewById(R.id.webview);
+        pb = (ProgressBar)findViewById(R.id.pb);
         webView.loadUrl(link);
 
         webView.setWebViewClient(new MyBrowser());
@@ -34,9 +37,12 @@ public class RSSLinkDetail extends AppCompatActivity {
     }
 
     private class MyBrowser extends WebViewClient {
+
+        public MyBrowser() {
+            pb.setVisibility(View.VISIBLE);
+        }
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
 
             return false;
         }
@@ -46,6 +52,8 @@ public class RSSLinkDetail extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+
+            pb.setVisibility(View.GONE);
 
 
         }

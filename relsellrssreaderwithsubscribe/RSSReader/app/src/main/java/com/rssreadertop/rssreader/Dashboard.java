@@ -123,7 +123,7 @@ public class Dashboard extends AppCompatActivity
         }
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
@@ -143,7 +143,7 @@ public class Dashboard extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -181,7 +181,7 @@ public class Dashboard extends AppCompatActivity
         Menu menu = navigationView.getMenu();
         menu.removeGroup(0);
         for (DummyContent.DummyItem dummyItem : listForSubscribedItems) {
-            menu.add(0, Integer.parseInt(dummyItem.id), 100, dummyItem.content).setIcon(R.mipmap.app_icon);
+            menu.add(0, Integer.parseInt(dummyItem.id), 100, dummyItem.content).setIcon(R.mipmap.android_menu_icon);
         }
     }
 

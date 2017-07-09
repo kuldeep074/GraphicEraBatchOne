@@ -12,6 +12,8 @@
 
     </WebView>
 
+    <ProgressBar android:layout_centerInParent="true" android:layout_width="wrap_content" android:visibility="gone" android:layout_height="wrap_content" style="@style/Base.Widget.AppCompat.ProgressBar" android:id="@+id/pb"/>
+
 
 
 </RelativeLayout>
