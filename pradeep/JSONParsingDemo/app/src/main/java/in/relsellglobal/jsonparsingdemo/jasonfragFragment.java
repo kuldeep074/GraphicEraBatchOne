@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +42,7 @@ public class jasonfragFragment extends Fragment {
 
     // TODO: Customize parameters
     private int mColumnCount = 1;
-
+    private ProgressBar pb;
     private OnListFragmentInteractionListener mListener;
     List<WebPojo> webPojoList;
     MyjasonfragRecyclerViewAdapter js;
@@ -56,7 +57,6 @@ public class jasonfragFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -64,20 +64,17 @@ public class jasonfragFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_jasonfrag_list, container, false);
 
+        RecyclerView rc=(RecyclerView) view.findViewById(R.id.list);
+        pb=(ProgressBar)view.findViewById(R.id.pb);
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+        rc.setLayoutManager(new LinearLayoutManager(getActivity()));
+
             webPojoList =new ArrayList<>();
+
             new JSONParsingTask().execute();
             js=new MyjasonfragRecyclerViewAdapter(webPojoList, mListener);
-            recyclerView.setAdapter(js);
-        }
+          rc.setAdapter(js);
+
         return view;
     }
 
@@ -117,6 +114,12 @@ public class jasonfragFragment extends Fragment {
     public class JSONParsingTask extends AsyncTask<Void,Void,String> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pb.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected String doInBackground(Void... params) {
 
             String url = "http://relsellglobal.in/DeliveryS/CRKInsightsServer/mobilecheck.php?controlVar=32";
@@ -154,6 +157,7 @@ public class jasonfragFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            pb.setVisibility(View.GONE);
 
             if(s!=null) {
                 try {

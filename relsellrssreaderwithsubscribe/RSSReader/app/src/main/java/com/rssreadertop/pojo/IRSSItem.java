@@ -15,4 +15,7 @@ public interface IRSSItem {
     public String getLink();
     public String getTitle();
     public String getPubDate();
+    public void setTitle(String title);
+    public void setLink(String link);
+    public void setPubDate(String pubDate);
 }

@@ -13,7 +13,7 @@
     <string name="errormsg_mainscreen">* Oh we missed to enter courier tracking no</string>
     <string name="autocomplete_static_text">Start typingGuideline to select courier</string>
     <string name="multiplenos">Enter Multiple AWB Number Seperated by (,) commas</string>
-    <string name="app_name_title">RSS Reading</string>
+    <string name="app_name_title">RSS Reader</string>
     <string name="web_screen_title">Tracking Result</string>
     <string name="history_screen_title">Tracks History</string>
     <string name="suggest_courier_screen_title">Suggest Courier</string>

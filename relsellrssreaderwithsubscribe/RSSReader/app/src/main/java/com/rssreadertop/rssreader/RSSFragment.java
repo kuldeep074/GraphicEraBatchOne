@@ -9,6 +9,7 @@
 package com.rssreadertop.rssreader;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rssreadertop.R;
+import com.rssreadertop.database.DBHandler;
 import com.rssreadertop.pojo.IRSSItem;
 import com.rssreadertop.rssreader.dummy.DummyContent;
 import com.rssreadertop.rssreader.dummy.DummyContent.DummyItem;
@@ -108,8 +110,10 @@ public class RSSFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        obj = new RSSHandleXml(finalUrl,mList,mHandlerForRSSData);
-        obj.fetchXML();
+        new DBReader().execute();
+
+        //we can move this to a service
+
 
 
     }
@@ -143,6 +147,34 @@ public class RSSFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(IRSSItem item);
     }
+
+
+    public class DBReader extends AsyncTask<Void,Void,List<IRSSItem>> {
+
+        @Override
+        protected List<IRSSItem> doInBackground(Void... params) {
+
+            DBHandler db = new DBHandler(getActivity());
+
+            return db.getAllData();
+        }
+
+        @Override
+        protected void onPostExecute(List<IRSSItem> irssItemList) {
+            super.onPostExecute(irssItemList);
+            if(irssItemList != null && !irssItemList.isEmpty()) {
+                mList.addAll(irssItemList);
+                mAdapter.notifyDataSetChanged();
+
+            } else {
+                obj = new RSSHandleXml(getActivity(),finalUrl,mList,mHandlerForRSSData);
+                obj.fetchXML();
+
+            }
+
+        }
+    }
+
 }
