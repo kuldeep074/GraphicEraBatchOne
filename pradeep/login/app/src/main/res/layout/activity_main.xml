@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/activity_main"
+    android:background="@drawable/ll_bg"
+>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_margin="30dp"
+        android:src="@mipmap/index1"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:text="Email"
+        android:layout_marginLeft="30dp"
+        android:textColor="#ffffff"
+        />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:background="#ffffff"
+        />
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:text="Password"
+        android:layout_marginLeft="30dp"
+        android:textColor="#ffffff"
+        />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:background="#ffffff"
+         />
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login "
+        android:layout_marginLeft="260dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/sel"
+        />
+
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:text="New to Dropbox?Create a free account"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@drawable/seltext"
+        android:gravity="center"
+        android:id="@+id/create"
+
+        />
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:text="Forgot your password?"
+        android:layout_marginLeft="30dp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        />
+
+</LinearLayout>
