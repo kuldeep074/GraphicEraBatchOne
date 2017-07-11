@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +39,8 @@ public class ItemFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
+
+    private ProgressBar pb;
     private OnListFragmentInteractionListener mListener;
 
     List<WebPojo> mList;
@@ -63,22 +66,24 @@ public class ItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
+        RecyclerView rc=(RecyclerView)view.findViewById(R.id.list);
+
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        /*if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+            }*/
 
             mList = new ArrayList<>();
             new JSONParsingTask().execute();
             myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(mList,mListener);
 
-            recyclerView.setAdapter(myItemRecyclerViewAdapter);
-        }
+        //    recyclerView.setAdapter(myItemRecyclerViewAdapter);
+        //}
         return view;
     }
 
@@ -118,6 +123,12 @@ public class ItemFragment extends Fragment {
     }
 
     public class JSONParsingTask extends AsyncTask<Void,Void,String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pb.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(Void... params) {
