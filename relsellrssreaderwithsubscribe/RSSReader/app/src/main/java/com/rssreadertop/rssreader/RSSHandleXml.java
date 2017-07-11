@@ -19,14 +19,17 @@ import java.util.ArrayList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 
+import com.rssreadertop.database.DBHandler;
 import com.rssreadertop.pojo.IRSSItem;
 import com.rssreadertop.pojo.RSSItem;
 
 public class RSSHandleXml implements IRSSHandler{
+    private final Context context;
     private String title = "title";
     private String link = "link";
     private String description = "description";
@@ -43,10 +46,11 @@ public class RSSHandleXml implements IRSSHandler{
 
     private Handler forRSS;
 
-    public RSSHandleXml(String url,ArrayList<IRSSItem> list,Handler handler){
+    public RSSHandleXml(Context context, String url, ArrayList<IRSSItem> list, Handler handler){
         this.urlString = url;
         this.mItemList = list;
         this.forRSS = handler;
+        this.context = context;
     }
 
     public String getTitle(){
@@ -150,12 +154,27 @@ public class RSSHandleXml implements IRSSHandler{
                     msg.what = 1;
                     forRSS.sendMessage(msg);
 
+
+                    // we can also put this data inside db
+
+                    DBHandler db = new DBHandler(context);
+                    if(mItemList != null && mItemList.size() > 0) {
+                        for(IRSSItem irssItem : mItemList) {
+                            db.addFeedsData(irssItem);
+                        }
+                    }
+
+
+
+
                 }
                 catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+
+
         thread.start();
     }
 }
