@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:background="@drawable/ll_bg"
+    >
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<LinearLayout
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/activity_main2"
+    android:background="@drawable/ll_bg"
+    android:gravity="center_horizontal"
+    android:padding="20dp"
+>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Join Us"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        />
+
+    <EditText
+        android:id="@+id/FirstName"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:background="#ffffff"
+        android:hint="@string/first_name"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        />
+
+    <EditText
+        android:id="@+id/LastName"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:hint="Last Name"
+        android:background="#ffffff"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+         />
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:hint="Email"
+        android:background="#ffffff"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:hint="password"
+        android:background="#ffffff"
+        android:textColorHint="#000000"
+        android:textColor="#000000"
+        />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up "
+        android:background="@drawable/sel"
+      />
+
+    <TextView
+        android:id="@+id/already"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Already have an account?"
+        android:textColor="@drawable/seltext"
+        android:textSize="15dp"
+        />
+
+</LinearLayout>
+</ScrollView>
+    </LinearLayout>
