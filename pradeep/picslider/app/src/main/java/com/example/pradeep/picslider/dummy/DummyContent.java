@@ -38,7 +38,7 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), "","");
     }
 
     private static String makeDetails(int position) {
@@ -54,9 +54,9 @@ public class DummyContent {
      * A dummy item representing a piece of content.
      */
     public static class DummyItem {
-        public final String id;
-        public final String content;
-        public final String details;
+        public String id;
+        public String content;
+        public String details;
 
         public DummyItem(String id, String content, String details) {
             this.id = id;

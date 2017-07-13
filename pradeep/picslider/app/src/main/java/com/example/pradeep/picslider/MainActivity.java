@@ -1,5 +1,6 @@
 package com.example.pradeep.picslider;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
@@ -17,17 +18,21 @@ import static android.R.attr.name;
 import static android.R.attr.password;
 import static android.R.attr.y;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener,BlankFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener {
 
+
+    private int PICK_IMAGE_REQUEST = 1;
+    private ItemFragment itemFragment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentManager fm=getSupportFragmentManager();
-        FragmentTransaction ft=fm.beginTransaction();
-        ft.replace(R.id.activity_main,new ItemFragment());
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        itemFragment = new ItemFragment();
+        ft.replace(R.id.activity_main, itemFragment);
         ft.commit();
     }
 
@@ -38,9 +43,9 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     }
 
     public void onThumbNailClicked() {
-        FragmentManager fm=getSupportFragmentManager();
-        FragmentTransaction ft=fm.beginTransaction();
-        ft.replace(R.id.activity_main,new BlankFragment());
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.activity_main, new BlankFragment());
         ft.addToBackStack(null);//use to go back to previous fragment window(home) when pressed back button
         ft.commit();
     }
@@ -49,4 +54,36 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     public void blankFragmentInteraction(Uri uri) {
 
     }
+
+
+    @Override
+    public void selectFromGallery(int position) {
+        Intent intent = new Intent();
+        // Show only images, no videos or anything else
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+// Always show the chooser (if there are multiple options available)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), position);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+
+            DummyContent.DummyItem dummyItem = DummyContent.ITEMS.get(0);
+            dummyItem.content = uri.toString();
+
+            itemFragment.updateAdapter();
+
+
+        }
+    }
+
+
+
 }

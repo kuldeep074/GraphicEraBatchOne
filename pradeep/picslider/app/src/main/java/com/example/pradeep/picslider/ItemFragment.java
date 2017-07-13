@@ -27,6 +27,7 @@ public class ItemFragment extends Fragment {
     private int mColumnCount = 3;
 
     private OnListFragmentInteractionListener mListener;
+    private MyItemRecyclerViewAdapter myItemRecyclerViewAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -55,12 +56,15 @@ public class ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener);
+            recyclerView.setAdapter(myItemRecyclerViewAdapter);
         }
         return view;
     }
 
-
+    public void updateAdapter() {
+        myItemRecyclerViewAdapter.notifyDataSetChanged();
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -92,6 +96,7 @@ public class ItemFragment extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
         void onThumbNailClicked();
+        void selectFromGallery(int position);
     }
 
     public interface OnFragmentInteractionListener {
