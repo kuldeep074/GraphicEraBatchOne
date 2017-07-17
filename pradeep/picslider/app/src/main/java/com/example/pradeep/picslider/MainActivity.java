@@ -71,16 +71,18 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 0 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        for(int i=0;i<11;i++) {
+            if (requestCode == i && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
-            Uri uri = data.getData();
+                Uri uri = data.getData();
 
-            DummyContent.DummyItem dummyItem = DummyContent.ITEMS.get(0);
-            dummyItem.content = uri.toString();
+                DummyContent.DummyItem dummyItem = DummyContent.ITEMS.get(i);
+                dummyItem.content = uri.toString();
 
-            itemFragment.updateAdapter();
+                itemFragment.updateAdapter();
 
 
+            }
         }
     }
 
