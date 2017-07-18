@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 public class ServiceDemoActivity extends AppCompatActivity {
 
+    Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -13,8 +14,17 @@ public class ServiceDemoActivity extends AppCompatActivity {
 
         System.out.println("demo class");
 
-       Intent i = new Intent(ServiceDemoActivity.this,MyService.class);
+        i = new Intent(ServiceDemoActivity.this,MyService.class);
+        i.putExtra("RollNo","42");
         startService(i);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(this.i);
+        System.out.println("stopped");
     }
 
 
