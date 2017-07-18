@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.pradeep.picslider.dummy.DummyContent;
 import com.example.pradeep.picslider.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,7 +57,10 @@ public class ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener);
+
+            List<DummyItem> dummyItems = Utility.getInstance().ITEMS;
+
+            myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(dummyItems, mListener);
             recyclerView.setAdapter(myItemRecyclerViewAdapter);
         }
         return view;

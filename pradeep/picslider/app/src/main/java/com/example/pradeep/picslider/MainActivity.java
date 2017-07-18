@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.pradeep.picslider.dummy.DummyContent;
 
+import java.util.List;
+
 import static android.R.attr.name;
 import static android.R.attr.password;
 import static android.R.attr.y;
@@ -29,11 +31,29 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        for (int i = 1; i <= 12; i++) {
+            addItem(createDummyItem(i));
+        }
+
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         itemFragment = new ItemFragment();
         ft.replace(R.id.activity_main, itemFragment);
         ft.commit();
+    }
+
+
+
+
+    private void addItem(DummyContent.DummyItem item) {
+        List<DummyContent.DummyItem> dummyItemList = Utility.getInstance().ITEMS;
+        dummyItemList.add(item);
+    }
+
+    private static DummyContent.DummyItem createDummyItem(int position) {
+        return new DummyContent.DummyItem(String.valueOf(position), "","");
     }
 
 
