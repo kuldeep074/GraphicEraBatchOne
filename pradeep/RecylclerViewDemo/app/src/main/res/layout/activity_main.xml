@@ -8,11 +8,10 @@
     tools:context="com.example.pradeep.recylclerviewdemo.MainActivity"
     android:id="@+id/mainactivity"
     android:background="#FF0B00"
-<<<<<<< HEAD
+
     android:orientation="vertical"
     >
-=======
+
     android:orientation="vertical">
->>>>>>> 718671a970c917ff0fabaf2b9cfb2ed400e2477c
 
 </LinearLayout>

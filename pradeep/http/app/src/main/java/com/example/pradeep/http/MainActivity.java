@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
                 URL url = new URL(urlToHit);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");\
+                connection.setRequestMethod("GET");
 
                 connection.setDoInput(true);
 
