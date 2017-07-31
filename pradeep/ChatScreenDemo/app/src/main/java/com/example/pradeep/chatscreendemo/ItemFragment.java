@@ -1,7 +1,10 @@
 package com.example.pradeep.chatscreendemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +31,7 @@ public class ItemFragment extends Fragment {
 
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    Intent i;
 
     private OnListFragmentInteractionListener mListener;
     RecyclerView mList;
@@ -38,10 +42,30 @@ public class ItemFragment extends Fragment {
     public static final List<DummyContent.DummyItem> ITEMS = new ArrayList<DummyItem>();
 
 
+
+    static MyItemRecyclerViewAdapter staAdapter;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
+
+    static Handler h = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+
+            String str = msg.obj.toString();
+            DummyContent.DummyItem item=new DummyContent.DummyItem("",str.toString(),"");
+            ITEMS.add(item);
+            staAdapter.notifyDataSetChanged();
+
+        }
+    };
+
+
     public ItemFragment() {
     }
 
@@ -56,8 +80,11 @@ public class ItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         View view = inflater.inflate(R.layout.activity_main, container, false);
         mList = (RecyclerView) view.findViewById(R.id.listv);
+        final Context context = view.getContext();
 
         send=(Button)view.findViewById(R.id.button);
         data=(EditText)view.findViewById(R.id.editext);
@@ -68,11 +95,16 @@ public class ItemFragment extends Fragment {
                 ITEMS.add(item);
                 adapter.notifyDataSetChanged();
 
+                i = new Intent(context,MyIntentService.class);
+                i.putExtra("str",data.getText().toString());
+                context.startService(i);
+                data.setText("");
+
             }
         });
         // Set the adapter
 
-        Context context = view.getContext();
+
 
         if (mColumnCount <= 1) {
             mList.setLayoutManager(new LinearLayoutManager(context));
@@ -80,6 +112,7 @@ public class ItemFragment extends Fragment {
             mList.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
         adapter=new MyItemRecyclerViewAdapter(ITEMS, mListener);
+        staAdapter = adapter;
         mList.setAdapter(adapter);
 
 
