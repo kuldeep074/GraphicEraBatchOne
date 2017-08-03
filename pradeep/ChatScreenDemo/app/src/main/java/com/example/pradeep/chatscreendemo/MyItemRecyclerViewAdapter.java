@@ -1,5 +1,6 @@
 package com.example.pradeep.chatscreendemo;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +36,17 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        DummyItem dummyItem=mValues.get(position);
+        holder.mItem=mValues.get(position);
+        if (dummyItem.isleft)
+        {
+            holder.mIdView.setTextColor(Color.BLUE);
+            holder.mIdView.setText(mValues.get(position).content);
+        }
+        else{
+            holder.mContentView.setTextColor(Color.BLACK);
+            holder.mContentView.setText(mValues.get(position).content);
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

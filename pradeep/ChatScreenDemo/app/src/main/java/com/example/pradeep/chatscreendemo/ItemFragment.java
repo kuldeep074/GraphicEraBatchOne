@@ -58,7 +58,7 @@ public class ItemFragment extends Fragment {
 
 
             String str = msg.obj.toString();
-            DummyContent.DummyItem item=new DummyContent.DummyItem("",str.toString(),"");
+            DummyContent.DummyItem item=new DummyContent.DummyItem("",str.toString(),"",false);
             ITEMS.add(item);
             staAdapter.notifyDataSetChanged();
 
@@ -91,7 +91,7 @@ public class ItemFragment extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DummyContent.DummyItem item=new DummyContent.DummyItem("",data.getText().toString(),"");
+                DummyContent.DummyItem item=new DummyContent.DummyItem("",data.getText().toString(),"",true);
                 ITEMS.add(item);
                 adapter.notifyDataSetChanged();
 
